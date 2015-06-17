@@ -1,4 +1,4 @@
-Steps to get going:
+<h2>Steps to get going:</h2>
 
 node import.js
 // mongo console commands:
