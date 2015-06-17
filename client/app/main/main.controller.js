@@ -38,7 +38,7 @@ angular.module('restaurantGradeApp')
             id: i+1,
             latitude: main.restaurants[i].latitude,
             longitude: main.restaurants[i].longitude,
-            labelContent: main.restaurants[i].restaurant_name
+            title: main.restaurants[i].restaurant_name
           };
           main.markers.push(marker);
         }
