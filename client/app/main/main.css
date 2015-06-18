@@ -32,3 +32,9 @@
 .angular-google-map-container {
   height: 400px;
 }
+.angular-leaflet-map{
+  height: 400px;
+}
+.leaflet-popup-content{
+  color: #101010;
+}

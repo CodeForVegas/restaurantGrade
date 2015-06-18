@@ -1,17 +1,24 @@
 'use strict';
 
 angular.module('restaurantGradeApp')
-  .controller('MainCtrl', function ($scope, $http, yelpAPI, getGrades, geolocation, uiGmapGoogleMapApi) {
+  .controller('MainCtrl', function ($scope, $http, yelpAPI, getGrades, geolocation) {
     var main = this;
     geolocation.getLocation()
       .then(function (data) {
         main.latitude = data.coords.latitude;
         main.longitude = data.coords.longitude;
-        main.map = { center: { latitude: main.latitude, longitude: main.longitude }, zoom: 14 }; // Map object
+        // main.map = { center: { latitude: main.latitude, longitude: main.longitude }, zoom: 14 }; // Map object
+        main.center = {
+          lat: main.latitude,
+          lng: main.longitude,
+          zoom: 13
+        };
+        $scope.defaults= {
+          scrollWheelZoom: false
+        };
       });
-    uiGmapGoogleMapApi.then(function(maps) {
 
-    });
+
     main.searched=false;
     $scope.searchLoc='Las+Vegas'; //TODO varName sux, and value needs to be
     $scope.searchRadius = 1600; // TODO accuracy/range for location search
@@ -26,23 +33,21 @@ angular.module('restaurantGradeApp')
       });
     };
     $scope.locSearch = function () {
-      main.markers = [];
+      main.markers = {};
       main.loading=true;
       main.searched=false;
       getGrades.locSearch(main.latitude, main.longitude, $scope.searchRadius, function(data) {
         main.searched = true;
         main.loading = false;
         main.restaurants = data;
-        for (var i=0;i< main.restaurants.length;i++){ // Make array of map markers
-          var marker = {
-            id: i+1,
-            latitude: main.restaurants[i].latitude,
-            longitude: main.restaurants[i].longitude,
-            title: main.restaurants[i].restaurant_name
+        for (var i=0;i< main.restaurants.length;i++){ // Make map markers
+          main.markers[i] = {
+            lat: main.restaurants[i].latitude,
+            lng: main.restaurants[i].longitude,
+            message: main.restaurants[i].restaurant_name
           };
-          main.markers.push(marker);
         }
-        console.dir(main.restaurants); //TODO Delete for production
+        console.dir(main.markers); //TODO Delete for production
       });
 
     };

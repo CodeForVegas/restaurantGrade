@@ -8,18 +8,18 @@ angular.module('restaurantGradeApp', [
   'ui.router',
   'ui.bootstrap',
   'geolocation',
-  'uiGmapgoogle-maps'
+  'leaflet-directive'
 ])
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, uiGmapGoogleMapApiProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
       .otherwise('/');
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
-    uiGmapGoogleMapApiProvider.configure({
-      key: 'AIzaSyAyrSXt8Nc1xcEC77kQWruvCNy1E_crFMw',
-      v: '3.17',
-      libraries: 'weather,geometry,visualization'
-    });
+    //uiGmapGoogleMapApiProvider.configure({
+    //  key: 'AIzaSyAyrSXt8Nc1xcEC77kQWruvCNy1E_crFMw',
+    //  v: '3.17',
+    //  libraries: 'weather,geometry,visualization'
+    //});
   })
 
   .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
