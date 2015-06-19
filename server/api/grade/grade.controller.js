@@ -22,7 +22,8 @@ exports.near = function(req, res) {
         },
         $maxDistance: parseInt(req.body.rad)
       }
-    }
+    },
+    category_name: "Restaurant"
   },
   function(err, grades){
     if(err) { return handleError(res, err); }
