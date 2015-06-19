@@ -29,12 +29,10 @@
     border-top: 1px solid #E5E5E5;
 }
 
-.angular-google-map-container {
-  height: 400px;
-}
 .angular-leaflet-map{
-  height: 400px;
+  height: 500px;
 }
 .leaflet-popup-content{
   color: #101010;
+  text-align: center;
 }
