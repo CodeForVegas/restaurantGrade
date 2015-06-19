@@ -21,11 +21,11 @@ angular.module('restaurantGradeApp')
 
     main.searched=false;
     $scope.searchLoc='Las+Vegas'; //TODO varName sux, and value needs to be
-    $scope.searchRadius = 1600; // TODO accuracy/range for location search
+    main.searchRadius = 1600; // TODO accuracy/range for location search
     $scope.yelpSearch = function () {
       main.loading=true;
       main.searched=false;
-      yelpAPI.locSearch(main.latitude, main.longitude, $scope.searchRadius, function(data) {
+      yelpAPI.locSearch(main.latitude, main.longitude, main.searchRadius, function(data) {
         main.searched = true;
         main.loading = false;
         $scope.yelp = data.businesses;
@@ -36,7 +36,7 @@ angular.module('restaurantGradeApp')
       main.markers = {};
       main.loading=true;
       main.searched=false;
-      getGrades.locSearch(main.latitude, main.longitude, $scope.searchRadius, function(data) {
+      getGrades.locSearch(main.latitude, main.longitude, main.searchRadius, function(data) {
         main.searched = true;
         main.loading = false;
         main.restaurants = data;
@@ -44,7 +44,7 @@ angular.module('restaurantGradeApp')
           main.markers[i] = {
             lat: main.restaurants[i].latitude,
             lng: main.restaurants[i].longitude,
-            message: main.restaurants[i].restaurant_name
+            message: main.restaurants[i].restaurant_name +'<br/><i class="fa fa-trophy"></i>'+main.restaurants[i].current_grade
           };
         }
         console.dir(main.markers); //TODO Delete for production

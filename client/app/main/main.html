@@ -6,7 +6,7 @@
     <!--<ui-gmap-google-map center="main.map.center" zoom="main.map.zoom">-->
       <!--<ui-gmap-markers ng-if="main.markers" models="main.markers" coords="'self'" options="'self'" icon="'icon'"></ui-gmap-markers>-->
     <!--</ui-gmap-google-map>-->
-    <leaflet ng-if="main.center" center="main.center" markers="main.markers"></leaflet>
+    <leaflet ng-if="main.center" center="main.center" bounds ="main.bounds" markers="main.markers"></leaflet>
 
   </div>
 </header>
@@ -20,12 +20,14 @@
       </span>
     </p>
   </form>
-  <div class="row">
-    <div class="col-lg-12">
-      <button class="btn btn-primary" ng-click="locSearch()" ><i class="fa fa-map-marker"></i></button>
-      {{main.latitude}} {{main.longitude}}
-    </div>
-  </div>
+    <form ng-submit="locSearch()">
+        <div class="input-group">
+          <span class="input-group-addon btn-primary" ng-click="locSearch()"><i class="fa fa-map-marker"></i></span>
+          <input type="text" class="form-control" placeholder="Radius in meters" ng-model="main.searchRadius" aria-describedby="search range">
+        </div>
+
+    </form>
+
   <div class="row" ng-show="main.loading">
     <div class="text-center center-block"><h2><i class="fa fa-spinner fa-pulse"></i></h2></div>
   </div>
